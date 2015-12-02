@@ -7,24 +7,28 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.mycompany.client.FXMLController">
+<AnchorPane id="AnchorPane" prefHeight="400" prefWidth="420" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.client.FXMLController">
     <children>
-        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-      <BorderPane prefHeight="200.0" prefWidth="320.0">
-         <top>
-             <Pane BorderPane.alignment="TOP_CENTER">
-                 <Label text="IP Server"/>
-                 <Label text="Port"/>
-                 <Label text="Name"/>
-             </Pane>
-         </top>
-         <center>
-            <ScrollPane prefHeight="100.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="100.0" />
-              </content>
-            </ScrollPane>
-         </center>
-      </BorderPane>
+        <BorderPane prefHeight="200.0" prefWidth="320.0">
+            <top>
+                <SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="HORIZONTAL" >
+                        <Label text="IP Server" />
+                        <TextField />
+                        <Label  text="Port" />
+                        <TextField />
+                        <Label text="Name" />
+                        <TextField />
+                </SplitPane>
+            </top>
+            <center>
+                <TextArea />
+            </center>
+            <bottom>
+                <SplitPane orientation="HORIZONTAL" >
+                       <TextArea layoutY="3.0" minHeight="20" minWidth="50" prefHeight="51.0" prefWidth="249.0" />
+                       <Button alignment="BASELINE_RIGHT"  layoutY="1.0" mnemonicParsing="false" text="Send" />
+                </SplitPane>
+            </bottom>
+        </BorderPane>
     </children>
 </AnchorPane>
