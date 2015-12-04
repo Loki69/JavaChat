@@ -8,8 +8,6 @@ import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Server implements Runnable {
 
@@ -51,21 +49,31 @@ public class Server implements Runnable {
             stepKey.remove();
             if (key.isAcceptable()) {
                 this.handleAccept(key);
+//                write(key, "Привет мир!\n");
             }
-            if (key.isReadable()) {
+            if (key.isReadable()) {;
                 this.handleRead(key);
             }
         }
     }
 
-    private final ByteBuffer welcomeBuf = ByteBuffer.wrap("Привет мир!\n".getBytes());
-
     private void handleAccept(SelectionKey key) throws IOException {
         SocketChannel sc = ((ServerSocketChannel) key.channel()).accept();
         sc.configureBlocking(false);
         sc.register(selector, SelectionKey.OP_READ);
-        sc.write(welcomeBuf);
-        welcomeBuf.rewind();
+    }
+
+    private void write(SelectionKey key, String message) throws IOException {
+        if (key.isValid() && key.channel() instanceof SocketChannel) {
+            SocketChannel channel = (SocketChannel) key.channel();
+            channel.write(ByteBuffer.wrap(message.getBytes()));
+            key.interestOps(SelectionKey.OP_READ);
+        }
+    }
+
+    private void handleRead(SelectionKey key) throws IOException {
+        String msg = readMSG(key);
+        broadcast(msg);
     }
 
     private String readMSG(SelectionKey key) throws IOException {
@@ -80,24 +88,18 @@ public class Server implements Runnable {
             sb.append(new String(bytes));
             buffer.clear();
         }
+        key.interestOps(SelectionKey.OP_WRITE);
         if (read < 0) {
-            sb.append(key.attachment().toString()).append(" exit");
+            sb.append("exit");
             ch.close();
         }
         return sb.toString();
     }
 
-    private void handleRead(SelectionKey key) throws IOException {
-        broadcast(readMSG(key));
-    }
-
     private void broadcast(String msg) throws IOException {
-        ByteBuffer msgBuf = ByteBuffer.wrap(msg.getBytes());
         for (SelectionKey key : selector.keys()) {
             if (key.isValid() && key.channel() instanceof SocketChannel) {
-                SocketChannel sch = (SocketChannel) key.channel();
-                sch.write(msgBuf);
-                msgBuf.rewind();
+                write(key, msg);
             }
         }
     }
