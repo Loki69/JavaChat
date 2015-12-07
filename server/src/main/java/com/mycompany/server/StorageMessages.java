@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.Date;
 import java.sql.Time;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,13 +17,13 @@ public class StorageMessages {
     PreparedStatement insert;
 
     private StorageMessages() throws ClassNotFoundException, SQLException {
-        Class.forName("com.h2database");
+        Class.forName("org.h2.Driver");
         connect = DriverManager.getConnection(
                 "jdbc:h2:file:/home/mur/NetBeansProjects/ClientServer/DB/DB",
                 "sa",
                 "");
-        select = connect.prepareStatement("select DATA,NAME,MESSAGERS from \"PUBLIC\".MESSAGERS");
-        insert = connect.prepareStatement("INSERT INTO MESSAGERS (DATA,NAME,MESSAGERS) VALUES (?,?,?)");
+        select = connect.prepareStatement("select DATE,NAME,MESSAGERS from \"PUBLIC\".MESSAGERS");
+        insert = connect.prepareStatement("INSERT INTO MESSAGERS (NAME,MESSAGERS) VALUES (?,?)");
     }
     
     public String getAllMSG(){
@@ -41,14 +41,12 @@ public class StorageMessages {
     }
     
     public void addMSG(String name,String msg) throws SQLException{
-        long timeInMilliS= System.currentTimeMillis() % 1000;
-        insert.setTime(1, new Time(timeInMilliS));
-        insert.setString(3, msg);
-        insert.setString(2, name);
+        insert.setString(1, name);
+        insert.setString(2, msg);
         insert.executeUpdate();
     }
     
-    public StorageMessages init() throws ClassNotFoundException, SQLException{
+    public static StorageMessages init() throws ClassNotFoundException, SQLException{
         return new StorageMessages();    
     }
 
