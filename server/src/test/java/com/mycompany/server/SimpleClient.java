@@ -12,9 +12,11 @@ public class SimpleClient implements Runnable {
 
     private String message = "";
     private Selector selector;
+    private int port ;
 
-    public SimpleClient(String message) {
+    public SimpleClient(String message,int port) {
         this.message = message;
+        this.port = port;
     }
 
     @Override
@@ -26,7 +28,7 @@ public class SimpleClient implements Runnable {
             channel.configureBlocking(false);
 
             channel.register(selector, SelectionKey.OP_CONNECT);
-            channel.connect(new InetSocketAddress("127.0.0.1", 1054));
+            channel.connect(new InetSocketAddress("127.0.0.1", port));
 
             while (!Thread.interrupted()) {
                 selector.select(1000);
@@ -84,7 +86,7 @@ public class SimpleClient implements Runnable {
         readBuffer.flip();
         byte[] buff = new byte[1024];
         readBuffer.get(buff, 0, length);
-        System.out.println("Server said: " + new String(buff));
+        System.out.println(new String(buff));
     }
 
     private void write(SelectionKey key) throws IOException {

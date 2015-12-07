@@ -326,3 +326,142 @@ select DATA,NAME,MESSAGERS from "PUBLIC".MESSAGERS [42122-190]
 	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+12-07 13:46:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+12-07 13:46:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+12-07 13:46:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+12-07 13:46:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+12-07 13:46:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+12-07 13:46:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+12-07 13:46:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+2015-12-07 13:50:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-190]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1468)
+	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:985)
+	at org.h2.jdbc.JdbcPreparedStatement.checkClosed(JdbcPreparedStatement.java:1620)
+	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:959)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:101)
+	at com.mycompany.server.StorageMessages.getAllMSG(StorageMessages.java:31)
+	at com.mycompany.server.Server.listPort(Server.java:57)
+	at com.mycompany.server.Server.run(Server.java:39)
+	at java.lang.Thread.run(Thread.java:745)
+2015-12-07 13:50:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-190]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1468)
+	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:985)
+	at org.h2.jdbc.JdbcPreparedStatement.checkClosed(JdbcPreparedStatement.java:1620)
+	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:959)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:101)
+	at com.mycompany.server.StorageMessages.getAllMSG(StorageMessages.java:31)
+	at com.mycompany.server.Server.listPort(Server.java:57)
+	at com.mycompany.server.Server.run(Server.java:39)
+	at java.lang.Thread.run(Thread.java:745)
+2015-12-07 13:50:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-190]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1468)
+	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:985)
+	at org.h2.jdbc.JdbcPreparedStatement.checkClosed(JdbcPreparedStatement.java:1620)
+	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:959)
+	at org.h2.jdbc.JdbcPreparedStatement.setParameter(JdbcPreparedStatement.java:1378)
+	at org.h2.jdbc.JdbcPreparedStatement.setString(JdbcPreparedStatement.java:352)
+	at com.mycompany.server.StorageMessages.addMSG(StorageMessages.java:44)
+	at com.mycompany.server.Server.setMSG(Server.java:88)
+	at com.mycompany.server.Server.handleRead(Server.java:81)
+	at com.mycompany.server.Server.listPort(Server.java:60)
+	at com.mycompany.server.Server.run(Server.java:39)
+	at java.lang.Thread.run(Thread.java:745)
+12-07 13:52:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+12-07 13:52:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+12-07 13:52:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+12-07 13:52:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+12-07 13:58:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+12-07 13:58:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+12-07 13:58:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: The object is already closed [90007-176]
+2015-12-07 13:58:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-190]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1468)
+	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:985)
+	at org.h2.jdbc.JdbcPreparedStatement.checkClosed(JdbcPreparedStatement.java:1620)
+	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:959)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:101)
+	at com.mycompany.server.StorageMessages.getAllMSG(StorageMessages.java:31)
+	at com.mycompany.server.Server.listPort(Server.java:57)
+	at com.mycompany.server.Server.run(Server.java:39)
+	at java.lang.Thread.run(Thread.java:745)
+2015-12-07 13:58:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-190]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1468)
+	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:985)
+	at org.h2.jdbc.JdbcPreparedStatement.checkClosed(JdbcPreparedStatement.java:1620)
+	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:959)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:101)
+	at com.mycompany.server.StorageMessages.getAllMSG(StorageMessages.java:31)
+	at com.mycompany.server.Server.listPort(Server.java:57)
+	at com.mycompany.server.Server.run(Server.java:39)
+	at java.lang.Thread.run(Thread.java:745)
+2015-12-07 13:58:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-190]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1468)
+	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:985)
+	at org.h2.jdbc.JdbcPreparedStatement.checkClosed(JdbcPreparedStatement.java:1620)
+	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:959)
+	at org.h2.jdbc.JdbcPreparedStatement.setParameter(JdbcPreparedStatement.java:1378)
+	at org.h2.jdbc.JdbcPreparedStatement.setString(JdbcPreparedStatement.java:352)
+	at com.mycompany.server.StorageMessages.addMSG(StorageMessages.java:44)
+	at com.mycompany.server.Server.setMSG(Server.java:88)
+	at com.mycompany.server.Server.handleRead(Server.java:81)
+	at com.mycompany.server.Server.listPort(Server.java:60)
+	at com.mycompany.server.Server.run(Server.java:39)
+	at java.lang.Thread.run(Thread.java:745)
+2015-12-07 14:03:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-190]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.checkClosed(JdbcConnection.java:1468)
+	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:985)
+	at org.h2.jdbc.JdbcPreparedStatement.checkClosed(JdbcPreparedStatement.java:1620)
+	at org.h2.jdbc.JdbcStatement.checkClosed(JdbcStatement.java:959)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:101)
+	at com.mycompany.server.StorageMessages.getAllMSG(StorageMessages.java:31)
+	at com.mycompany.server.Server.listPort(Server.java:58)
+	at com.mycompany.server.Server.run(Server.java:39)
+	at java.lang.Thread.run(Thread.java:745)

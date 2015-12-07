@@ -7,7 +7,10 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.sql.SQLException;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Server implements Runnable {
 
@@ -15,8 +18,10 @@ public class Server implements Runnable {
     private ServerSocketChannel serverSocet;
     private Selector selector;
     private ByteBuffer buffer = ByteBuffer.allocate(1050);
+    private StorageMessages storeg;
 
-    private Server(int port) throws IOException {
+    private Server(int port) throws IOException, ClassNotFoundException, SQLException {
+        storeg = StorageMessages.init();
         this.port = port;
         this.serverSocet = ServerSocketChannel.open();
         this.serverSocet.socket().bind(new InetSocketAddress(port));
@@ -33,13 +38,13 @@ public class Server implements Runnable {
             while (this.serverSocet.isOpen()) {
                 listPort();
             }
-        } catch (IOException e) {
-            System.out.println("IOException\nStack trace:");
+        } catch (IOException | SQLException e) {
+            System.out.println("Exception\nStack trace:");
             e.printStackTrace();
         }
     }
 
-    private final void listPort() throws IOException {
+    private final void listPort() throws IOException, SQLException {
         selector.select();
         Iterator<SelectionKey> stepKey;
         SelectionKey key;
@@ -49,7 +54,6 @@ public class Server implements Runnable {
             stepKey.remove();
             if (key.isAcceptable()) {
                 this.handleAccept(key);
-//                write(key, "Привет мир!\n");
             }
             if (key.isReadable()) {;
                 this.handleRead(key);
@@ -61,6 +65,8 @@ public class Server implements Runnable {
         SocketChannel sc = ((ServerSocketChannel) key.channel()).accept();
         sc.configureBlocking(false);
         sc.register(selector, SelectionKey.OP_READ);
+        ByteBuffer msgBuf=ByteBuffer.wrap(storeg.getAllMSG().getBytes());
+        sc.write(msgBuf);
     }
 
     private void write(SelectionKey key, String message) throws IOException {
@@ -71,9 +77,20 @@ public class Server implements Runnable {
         }
     }
 
-    private void handleRead(SelectionKey key) throws IOException {
+    private void handleRead(SelectionKey key) throws IOException, SQLException {
         String msg = readMSG(key);
+        setMSG(msg);
         broadcast(msg);
+    }
+
+    private void setMSG(String msg) throws SQLException {
+        String[] result = msg.split(":");
+        if (result.length > 1) {
+            storeg.addMSG(result[0], result[1]);
+        } else {
+            storeg.addMSG("anonim", msg);
+        }
+
     }
 
     private String readMSG(SelectionKey key) throws IOException {
@@ -104,7 +121,7 @@ public class Server implements Runnable {
         }
     }
 
-    public static Server init(int port) throws IOException {
+    public static Server init(int port) throws IOException, ClassNotFoundException, SQLException {
         return new Server(port);
     }
 }
