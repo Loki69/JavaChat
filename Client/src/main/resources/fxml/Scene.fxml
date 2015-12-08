@@ -7,21 +7,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400" prefWidth="420" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.client.FXMLController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="400" prefWidth="420" xmlns="http://javafx.com/javafx/8" fx:controller="com.mycompany.client.FXMLController">
     <children>
         <BorderPane prefHeight="200.0" prefWidth="320.0">
             <top>
                 <SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="HORIZONTAL" >
                         <Label text="IP Server" />
-                        <TextField />
+                        <TextField fx:id="ip" maxWidth="300"/>
                         <Label  text="Port" />
-                        <TextField />
+                        <TextField fx:id="port" maxWidth="50"/>
                         <Label text="Name" />
-                        <TextField />
+                        <TextField fx:id="userName" maxWidth="100"/>
+                        <Button alignment="BASELINE_RIGHT"  layoutY="1.0" mnemonicParsing="false" text="Connect" onAction="#connectToServer"  />
                 </SplitPane>
             </top>
             <center>
-                <TextArea />
+                <TextArea fx:id="board" />
             </center>
             <bottom>
                 <SplitPane orientation="HORIZONTAL" >
