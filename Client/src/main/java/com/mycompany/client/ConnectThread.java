@@ -7,30 +7,30 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class NetworkClient {
+public class ConnectThread {
 
-    private static volatile NetworkClient instance;
+    private static volatile ConnectThread instance;
     private final Socket socket;
     private final DataInputStream inputData;
     private final DataOutputStream outputData;
     private final String name;
 
-    private NetworkClient(String ip, int port, String name) throws IOException {
+    private ConnectThread(String ip, int port, String name) throws IOException {
         socket = new Socket(ip, port);
         inputData = (DataInputStream) socket.getInputStream();
         outputData = (DataOutputStream) socket.getOutputStream();
         this.name = name;
     }
 
-    public static NetworkClient init(String ip, int port, String name) throws IOException {
+    public static ConnectThread init(String ip, int port, String name) throws IOException {
         if (instance != null) {
             instance.close();
         }
-        instance = new NetworkClient(ip, port, name);
+        instance = new ConnectThread(ip, port, name);
         return instance;
     }
 
-    public static NetworkClient init() throws IOException {
+    public static ConnectThread init() throws IOException {
         if (instance != null) {
             return instance;
         }

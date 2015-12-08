@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 
 public class FXMLController implements Initializable {
 
-    private NetworkClient client = null;
+    private ConnectThread client = null;
     @FXML
     TextField ip;
     @FXML
@@ -25,7 +25,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void connectToServer() {
         try {
-            client = NetworkClient.init(ip.getSelectedText(), Integer.parseInt(port.getText()), userName.getSelectedText());
+            client = ConnectThread.init(ip.getSelectedText(), Integer.parseInt(port.getText()), userName.getSelectedText());
         } catch (IOException ex) {
             board.setText("invalid server or port");
         }
@@ -33,7 +33,10 @@ public class FXMLController implements Initializable {
             @Override
             public void run() {
                 while (true) {
-                    board.setText(board.getText() + "helo\n");
+                    synchronized (board) {
+                        board.setText("hi\n" + board.getText());
+                    }
+
                 }
             }
         }).start();
