@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="400" prefWidth="420" xmlns="http://javafx.com/javafx/8" fx:controller="com.mycompany.client.FXMLController">
+    <children>
+        <BorderPane prefHeight="200.0" prefWidth="320.0">
+            <top>
+                <SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="HORIZONTAL" >
+                        <Label text="IP Server" />
+                        <TextField fx:id="ip" maxWidth="300"/>
+                        <Label  text="Port" />
+                        <TextField fx:id="port" maxWidth="50"/>
+                        <Label text="Name" />
+                        <TextField fx:id="userName" maxWidth="100"/>
+                        <Button alignment="BASELINE_RIGHT"  layoutY="1.0" mnemonicParsing="false" text="Connect" onAction="#connectToServer"  />
+                </SplitPane>
+            </top>
+            <center>
+                <TextArea fx:id="board" />
+            </center>
+            <bottom>
+                <SplitPane orientation="HORIZONTAL" >
+                       <TextArea layoutY="3.0" minHeight="20" minWidth="50" prefHeight="51.0" prefWidth="249.0" />
+                       <Button alignment="BASELINE_RIGHT"  layoutY="1.0" mnemonicParsing="false" text="Send" />
+                </SplitPane>
+            </bottom>
+        </BorderPane>
+    </children>
+</AnchorPane>
