@@ -8,14 +8,14 @@ import java.util.logging.Logger;
 public class Main {
 
     public static void main(String[] args) {
-        if(args.length > 0){
+//        if(args.length > 0){
         try {
-            Server.init(1054);
+            new Thread(Server.init(1054)).start();
         } catch (ClassNotFoundException | SQLException | IOException ex) {
             System.err.println(ex.getMessage());
         }
-        }else{
-            System.out.println("port init wos not set");
-        }
+//        }else{
+//            System.out.println("port init wos not set");
+//        }
     }
 }

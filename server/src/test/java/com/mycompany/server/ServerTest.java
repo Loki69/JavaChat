@@ -19,25 +19,23 @@ public class ServerTest {
     @Test
     public void testInit() {
         try {
-            Server.init(1054);
+            new Thread(Server.init(1054)).start();
         } catch (IOException | ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ServerTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-//    @Test
-//    public void testMultiConnect() {
-//        try {
-//            new Thread(Server.init(1054)).start();
-//            Thread.sleep(5000);
-//            new Thread(new SimpleClient("arad")).start();
-//            multiConnect();
-//        } catch (InterruptedException | ClassNotFoundException | SQLException | IOException ex) {
-//            System.err.println(ex.getMessage());
-//        }
-//    }
-
+    @Test
+    public void testMultiConnect() {
+        try {
+            Thread.sleep(5000);
+            new Thread(new SimpleClient("arad",1054)).start();
+            multiConnect();
+        } catch (InterruptedException | IOException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
     private void multiConnect() throws IOException {
         while (true) {
             InetSocketAddress hostAddress = new InetSocketAddress(1054);
@@ -46,6 +44,12 @@ public class ServerTest {
             for (int i = 0; i < messages.length; i++) {
                 byte[] message = new String(messages[i]).getBytes();
                 ByteBuffer buffer = ByteBuffer.wrap(message);
+                ByteBuffer readBuffer = ByteBuffer.allocate(1000);
+                int length = client.read(readBuffer);
+                readBuffer.flip();
+                byte[] buff = new byte[1024];
+                readBuffer.get(buff, 0, length);
+                System.out.println("holo"+new String(buff));
                 client.write(buffer);
                 buffer.clear();
             }
@@ -57,11 +61,10 @@ public class ServerTest {
     public void testConnect() {
         System.out.println("her");
         try {
-            new Thread(Server.init(1064)).start();
             Thread.sleep(8000);
-            new Thread(new SimpleClient("arad",1064)).start();
+            new Thread(new SimpleClient("arad", 1064)).start();
             Thread.sleep(8000);
-        } catch (InterruptedException | ClassNotFoundException | SQLException | IOException ex) {
+        } catch (InterruptedException ex) {
             System.err.println(ex.getMessage());
         }
     }

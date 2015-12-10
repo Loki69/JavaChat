@@ -18,7 +18,7 @@
                         <TextField fx:id="port" maxWidth="50"/>
                         <Label text="Name" />
                         <TextField fx:id="userName" maxWidth="100"/>
-                        <Button alignment="BASELINE_RIGHT"  layoutY="1.0" mnemonicParsing="false" text="Connect" onAction="#connectToServer"  />
+                        <Button alignment="BASELINE_RIGHT"  layoutY="1.0" mnemonicParsing="false" text="Connect" onAction="#connectToServer"/>
                 </SplitPane>
             </top>
             <center>
@@ -26,8 +26,8 @@
             </center>
             <bottom>
                 <SplitPane orientation="HORIZONTAL" >
-                       <TextArea layoutY="3.0" minHeight="20" minWidth="50" prefHeight="51.0" prefWidth="249.0" />
-                       <Button alignment="BASELINE_RIGHT"  layoutY="1.0" mnemonicParsing="false" text="Send" />
+                       <TextArea layoutY="3.0" minHeight="20" minWidth="50" prefHeight="51.0" prefWidth="249.0" fx:id="message"  />
+                       <Button alignment="BASELINE_RIGHT"  layoutY="1.0" mnemonicParsing="false" text="Send" onAction="#send"/>
                 </SplitPane>
             </bottom>
         </BorderPane>

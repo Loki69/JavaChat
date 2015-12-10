@@ -9,8 +9,6 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.sql.SQLException;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Server implements Runnable {
 
@@ -64,7 +62,7 @@ public class Server implements Runnable {
     private void handleAccept(SelectionKey key) throws IOException {
         SocketChannel sc = ((ServerSocketChannel) key.channel()).accept();
         sc.configureBlocking(false);
-        sc.register(selector, SelectionKey.OP_READ);
+        sc.register(selector, SelectionKey.OP_WRITE);
         ByteBuffer msgBuf=ByteBuffer.wrap(storeg.getAllMSG().getBytes());
         sc.write(msgBuf);
     }
@@ -79,6 +77,7 @@ public class Server implements Runnable {
 
     private void handleRead(SelectionKey key) throws IOException, SQLException {
         String msg = readMSG(key);
+        System.out.println(msg);
         setMSG(msg);
         broadcast(msg);
     }

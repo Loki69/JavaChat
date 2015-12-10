@@ -10,7 +10,8 @@ import javafx.scene.control.TextField;
 
 public class FXMLController {
 
-    private ConnectThread client = null;
+    private Chat client = null;
+
     @FXML
     TextField ip;
     @FXML
@@ -19,42 +20,62 @@ public class FXMLController {
     TextField userName;
     @FXML
     TextArea board;
+    @FXML
+    TextArea message;
+
+    @FXML
+    private void send() {
+        System.out.println("send");
+        try {
+            client.write("dfs");
+        } catch (IOException ex) {
+            System.out.println("IO");
+        }catch(NullPointerException ex){
+            System.out.println("null");
+        }
+    }
 
     @FXML
     private void connectToServer() {
         board.setScrollTop(Double.MAX_VALUE);
         try {
-            client = ConnectThread.init(ip.getSelectedText(), Integer.parseInt(port.getText()), userName.getSelectedText());
+            client = new ClientChat(ip.getText(),
+                    Integer.parseInt(port.getText()),
+                    userName.getText());
         } catch (IOException ex) {
             board.setText("invalid server or port");
         }
+        autoUpdate();
     }
 
-    private void autoUpdateTextArea() {
+    private void autoUpdate() {
         Thread autoUpdate = new Thread(new Runnable() {
             @Override
             public void run() {
-                while(true) {
-                    updateTextArea();
+                while (true) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+
+                    }
+                    update();
                 }
             }
         });
         autoUpdate.setName("autoUpdateTextArea");
         autoUpdate.start();
     }
-    
 
-    private void updateTextArea() {
+    private void update() {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                if(client != null){
+                if (client != null) {
                     try {
                         board.appendText(client.read());
                     } catch (IOException ex) {
-                        Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                        System.out.println("her");
                     }
-                    
                 }
             }
         });

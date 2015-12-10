@@ -19,10 +19,10 @@ public class StorageMessages {
     private StorageMessages() throws ClassNotFoundException, SQLException {
         Class.forName("org.h2.Driver");
         connect = DriverManager.getConnection(
-                "jdbc:h2:file:/home/mur/NetBeansProjects/ClientServer/DB/DB",
+                "jdbc:h2:file:/home/loki/workflow/Java/ClientServer/DB/DB",
                 "sa",
                 "");
-        select = connect.prepareStatement("select DATE,NAME,MESSAGERS from \"PUBLIC\".MESSAGERS");
+        select = connect.prepareStatement("select DATE,NAME,MESSAGERS from \"PUBLIC\".MESSAGERS ORDER BY ID");
         insert = connect.prepareStatement("INSERT INTO MESSAGERS (NAME,MESSAGERS) VALUES (?,?)");
     }
     
