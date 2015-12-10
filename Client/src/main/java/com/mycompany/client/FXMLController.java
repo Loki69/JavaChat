@@ -74,7 +74,9 @@ public class FXMLController {
                     try {
                         board.appendText(client.read());
                     } catch (IOException ex) {
-                        System.out.println("her");
+                        client.close();
+                        client = null;
+                        board.appendText("Conncet error");
                     }
                 }
             }

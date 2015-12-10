@@ -24,4 +24,9 @@ public class ClientChat implements Chat {
         connect.write(new StringBuilder(name).append(":").append(message).toString());
     }
 
+    @Override
+    public void close() {
+        connect.close();
+    }
+
 }

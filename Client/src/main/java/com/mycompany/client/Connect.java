@@ -49,9 +49,11 @@ public class Connect implements Chat {
         System.out.println(client.write(ByteBuffer.wrap(message.getBytes())));
     }
 
-    private void close() {
+    @Override
+    public void close() {
         try {
             client.close();
+            instance = null;
         } catch (IOException ex) {
             System.err.println(ex);
         }
