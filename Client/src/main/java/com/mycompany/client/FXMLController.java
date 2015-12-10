@@ -25,7 +25,6 @@ public class FXMLController {
 
     @FXML
     private void send() {
-        System.out.println("send");
         try {
             client.write("dfs");
         } catch (IOException ex) {

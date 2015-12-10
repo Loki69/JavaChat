@@ -21,7 +21,7 @@ public class ClientChat implements Chat {
 
     @Override
     public void write(String message) throws IOException {
-        connect.write(name + message);
+        connect.write(new StringBuilder(name).append(":").append(message).toString());
     }
 
 }

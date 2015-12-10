@@ -51,9 +51,11 @@ public class Server implements Runnable {
             key = stepKey.next();
             stepKey.remove();
             if (key.isAcceptable()) {
+                System.out.println("acc");
                 this.handleAccept(key);
             }
-            if (key.isReadable()) {;
+            if (key.isReadable()) {
+                System.out.println("read");
                 this.handleRead(key);
             }
         }
@@ -62,7 +64,7 @@ public class Server implements Runnable {
     private void handleAccept(SelectionKey key) throws IOException {
         SocketChannel sc = ((ServerSocketChannel) key.channel()).accept();
         sc.configureBlocking(false);
-        sc.register(selector, SelectionKey.OP_WRITE);
+        sc.register(selector, SelectionKey.OP_READ);
         ByteBuffer msgBuf=ByteBuffer.wrap(storeg.getAllMSG().getBytes());
         sc.write(msgBuf);
     }
@@ -89,7 +91,6 @@ public class Server implements Runnable {
         } else {
             storeg.addMSG("anonim", msg);
         }
-
     }
 
     private String readMSG(SelectionKey key) throws IOException {
