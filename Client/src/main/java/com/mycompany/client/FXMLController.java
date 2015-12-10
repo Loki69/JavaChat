@@ -21,12 +21,13 @@ public class FXMLController {
     @FXML
     TextArea board;
     @FXML
-    TextArea message;
+    TextField message;
 
     @FXML
     private void send() {
         try {
-            client.write("dfs");
+            client.write(message.getText());
+            message.clear();
         } catch (IOException ex) {
             System.out.println("IO");
         }catch(NullPointerException ex){

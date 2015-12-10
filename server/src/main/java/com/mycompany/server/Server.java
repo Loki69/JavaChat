@@ -51,11 +51,9 @@ public class Server implements Runnable {
             key = stepKey.next();
             stepKey.remove();
             if (key.isAcceptable()) {
-                System.out.println("acc");
                 this.handleAccept(key);
             }
             if (key.isReadable()) {
-                System.out.println("read");
                 this.handleRead(key);
             }
         }
@@ -78,9 +76,7 @@ public class Server implements Runnable {
     }
 
     private void handleRead(SelectionKey key) throws IOException, SQLException {
-        String msg = readMSG(key);
-        System.out.println(msg);
-        setMSG(msg);
+        String msg = String.format("[%s] %s \n", CurrentDateTime.getCurrecntDataTime(),readMSG(key));
         broadcast(msg);
     }
 
@@ -93,7 +89,7 @@ public class Server implements Runnable {
         }
     }
 
-    private String readMSG(SelectionKey key) throws IOException {
+    private String readMSG(SelectionKey key) throws IOException, SQLException {
         SocketChannel ch = (SocketChannel) key.channel();
         buffer.clear();
         int read = 0;
@@ -110,9 +106,10 @@ public class Server implements Runnable {
             sb.append("exit");
             ch.close();
         }
+        setMSG(sb.toString());
         return sb.toString();
     }
-
+    
     private void broadcast(String msg) throws IOException {
         for (SelectionKey key : selector.keys()) {
             if (key.isValid() && key.channel() instanceof SocketChannel) {

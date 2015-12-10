@@ -26,7 +26,7 @@
             </center>
             <bottom>
                 <SplitPane orientation="HORIZONTAL" >
-                       <TextArea layoutY="3.0" minHeight="20" minWidth="50" prefHeight="51.0" prefWidth="249.0" fx:id="message"  />
+                       <TextField layoutY="3.0" minHeight="20" minWidth="50" prefHeight="51.0" prefWidth="249.0" fx:id="message"  />
                        <Button alignment="BASELINE_RIGHT"  layoutY="1.0" mnemonicParsing="false" text="Send" onAction="#send"/>
                 </SplitPane>
             </bottom>
