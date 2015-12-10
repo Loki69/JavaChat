@@ -30,14 +30,16 @@ public class ConnectThread {
         return instance;
     }
 
-    public static ConnectThread init() throws IOException {
-        if (instance != null) {
-            return instance;
-        }
-        new IOException();
-        return null;
+    public String read() throws IOException{
+         int length = inputData.available();
+         byte[] buf = new byte[length];
+         inputData.readFully(buf);
+         return new String(buf);
     }
-
+    public void write(String msg) throws IOException{
+        outputData.writeUTF(msg);
+    }
+    
     private void close() {
         try {
             inputData.close();

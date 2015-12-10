@@ -1,16 +1,14 @@
 package com.mycompany.client;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-public class FXMLController implements Initializable {
+public class FXMLController {
 
     private ConnectThread client = null;
     @FXML
@@ -24,29 +22,41 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void connectToServer() {
+        board.setScrollTop(Double.MAX_VALUE);
         try {
             client = ConnectThread.init(ip.getSelectedText(), Integer.parseInt(port.getText()), userName.getSelectedText());
         } catch (IOException ex) {
             board.setText("invalid server or port");
         }
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    synchronized (board) {
-                        board.setText("hi\n" + board.getText());
-                    }
-
-                }
-            }
-        }).start();
     }
 
-//    @Override
-//    public void initialize(URL location, ResourceBundle resources) {
-//    }
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        board.setText("halo");
+    private void autoUpdateTextArea() {
+        Thread autoUpdate = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true) {
+                    updateTextArea();
+                }
+            }
+        });
+        autoUpdate.setName("autoUpdateTextArea");
+        autoUpdate.start();
+    }
+    
+
+    private void updateTextArea() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                if(client != null){
+                    try {
+                        board.appendText(client.read());
+                    } catch (IOException ex) {
+                        Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                }
+            }
+        });
     }
 }
